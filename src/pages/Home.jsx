@@ -11,7 +11,7 @@ export default function Home() {
   });
   const [loading, setLoading] = useState(true);
 
-  // Cargar productos de la API
+  
   useEffect(() => {
     fetch(`${API_URL}/products`)
       .then(res => res.json())
@@ -25,7 +25,7 @@ export default function Home() {
       });
   }, []);
 
-  // Persistir cambios
+  
   useEffect(() => {
     localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
   }, [shoppingList]);
@@ -46,7 +46,7 @@ export default function Home() {
         <p>Cargando productos disponibles...</p>
       ) : (
         <div className="flex gap-8">
-          {/* Lista de productos disponibles */}
+          {}
           <div className="flex-1">
             <h2 className="font-medium mb-4 text-lg">Productos Disponibles</h2>
             <ul className="space-y-3">
