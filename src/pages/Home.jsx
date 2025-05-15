@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import ItemList from '../components/ItemList';
 
 const API_URL = 'https://front2.nsideas.cl/api';
@@ -11,7 +12,6 @@ export default function Home() {
   });
   const [loading, setLoading] = useState(true);
 
-  
   useEffect(() => {
     fetch(`${API_URL}/products`)
       .then(res => res.json())
@@ -25,7 +25,6 @@ export default function Home() {
       });
   }, []);
 
-  
   useEffect(() => {
     localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
   }, [shoppingList]);
@@ -46,7 +45,6 @@ export default function Home() {
         <p>Cargando productos disponibles...</p>
       ) : (
         <div className="flex gap-8">
-          {}
           <div className="flex-1">
             <h2 className="font-medium mb-4 text-lg">Productos Disponibles</h2>
             <ul className="space-y-3">
@@ -64,10 +62,18 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Lista de tus productos */}
           <div className="flex-1">
             <h2 className="font-medium mb-4 text-lg">Tus Productos</h2>
             <ItemList items={shoppingList} onRemove={removeFromShoppingList} />
+            
+            {shoppingList.length > 0 && (
+              <Link 
+                to="/checkout" 
+                className="bg-green-500 text-white px-4 py-2 rounded block mt-4 text-center hover:bg-green-600"
+              >
+                Ver Resumen
+              </Link>
+            )}
           </div>
         </div>
       )}
